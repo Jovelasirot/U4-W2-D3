@@ -29,7 +29,7 @@ public class Es2 {
 
         Supplier<Order> orderSupplier = getOrderSupplier();
         List<Order> orderList = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 20; i++) {
             orderList.add(orderSupplier.get());
         }
 
@@ -74,8 +74,6 @@ public class Es2 {
 
 //            dates
             LocalDate startRangeDate = LocalDate.parse("2021-02-01");
-            LocalDate endRangeDate = startRangeDate.plusMonths(2);
-
 
             int rdmProduct = rdm.nextInt(2, 3);
 //            products
