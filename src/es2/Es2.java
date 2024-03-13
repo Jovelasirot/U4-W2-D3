@@ -33,13 +33,12 @@ public class Es2 {
             orderList.add(orderSupplier.get());
         }
 
-        List<String> babyProducts = new ArrayList<>();
-
-        orderList.forEach(order -> order.getProducts().forEach(product -> {
+        List<Product> babyProducts = new ArrayList<>();
+        for (Product product : productList) {
             if (product.getCategory().equals("Baby")) {
-                babyProducts.add(String.valueOf(order));
+                babyProducts.add(product);
             }
-        }));
+        }
 
         System.out.println(babyProducts);
     }
@@ -54,7 +53,12 @@ public class Es2 {
 
             int rmdName = rmd.nextInt(0, 5);
 
-            List<String> nameList = List.of("Lexi", "Anna", "William", "Joe", "Adam");
+            List<String> nameList = new ArrayList<>();
+            nameList.add("Lexi");
+            nameList.add("Anna");
+            nameList.add("William");
+            nameList.add("Joe");
+            nameList.add("Adam");
 
             return new Customer(rmdId, nameList.get(rmdName), rmdTier);
         };
@@ -73,15 +77,14 @@ public class Es2 {
             LocalDate endRangeDate = startRangeDate.plusMonths(2);
 
 
-            int rdmProduct = rdm.nextInt(1, 5);
+            int rdmProduct = rdm.nextInt(2, 3);
 //            products
             List<Product> rdmProductList = new ArrayList<>();
             for (int i = 0; i < rdmProduct; i++) {
                 rdmProductList.add(getProductSupplier().get());
             }
 
-            int randomCustomerIndex = rdm.nextInt(0, getCustomerSupplier().size());
-            Customer rdmCustomer = customerList.get(randomCustomerIndex);
+            Customer rdmCustomer = getCustomerSupplier().get();
 
             LocalDate orderDate = startRangeDate.plusDays(rdm.nextInt(1, 200));
             LocalDate deliveryDate = orderDate.plusDays(rdm.nextInt(14));
