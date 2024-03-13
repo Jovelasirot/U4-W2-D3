@@ -32,18 +32,21 @@ public class Es3 {
 
         System.out.println("All products");
         System.out.println(productList);
-        System.out.println(productSupplier1);
 
         System.out.println("-------------------------------");
 
+        List<Product> boysProducts = productList.stream().filter(product -> product.getCategory().equals("Boys")).toList();
 
-        List<Product> boysProducts = productList.stream().filter(product -> product.getCategory().equals("Boys")).map(product -> {
+        System.out.println("Only boys products");
+        System.out.println(boysProducts);
+
+        List<Product> discountedBoysProducts = boysProducts.stream().map(product -> {
             double discountedPrice = product.getPrice() - (product.getPrice() / 10);
             return new Product(product.getId(), product.getName(), product.getCategory(), discountedPrice);
         }).toList();
 
 
         System.out.println("Discounted boys products");
-        System.out.println(boysProducts);
+        System.out.println(discountedBoysProducts);
     }
 }
