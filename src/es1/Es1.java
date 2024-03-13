@@ -28,17 +28,17 @@ public class Es1 {
 
     }
 
-    private static Supplier<Product> getProductSupplier() {
-        Random rmd = new Random();
+    public static Supplier<Product> getProductSupplier() {
+        Random rdm = new Random();
 
         return () -> {
-            long rmdId = rmd.nextLong(10000, 100000);
+            long rdmId = rdm.nextLong(10000, 100000);
 
-            double rmdPrice = rmd.nextDouble(10.00, 200.00);
+            int rdmName = rdm.nextInt(0, 5);
 
-            int rmdName = rmd.nextInt(0, 5);
+            int rdmCategory = rdm.nextInt(0, 5);
 
-            int rmdCategory = rmd.nextInt(0, 5);
+            double rdmPrice = rdm.nextDouble(10.00, 200.00);
 
             List<String> nameList = new ArrayList<>();
             nameList.add("Product A");
@@ -54,7 +54,7 @@ public class Es1 {
             categoryList.add("Cars");
             categoryList.add("Guns");
 
-            return new Product(rmdId, nameList.get(rmdName), categoryList.get(rmdCategory), rmdPrice);
+            return new Product(rdmId, nameList.get(rdmName), categoryList.get(rdmCategory), rdmPrice);
         };
     }
 }
