@@ -40,19 +40,9 @@ public class Es1 {
 
             double rdmPrice = rdm.nextDouble(10.00, 200.00);
 
-            List<String> nameList = new ArrayList<>();
-            nameList.add("Product A");
-            nameList.add("Product B");
-            nameList.add("Product C");
-            nameList.add("Product D");
-            nameList.add("Product E");
+            List<String> nameList = List.of("Product A", "Product B", "Product C", "Product D", "Product E");
 
-            List<String> categoryList = new ArrayList<>();
-            categoryList.add("Books");
-            categoryList.add("Boys");
-            categoryList.add("Baby");
-            categoryList.add("Cars");
-            categoryList.add("Guns");
+            List<String> categoryList = List.of("Books", "Boys", "Baby", "Cars", "Guns");
 
             return new Product(rdmId, nameList.get(rdmName), categoryList.get(rdmCategory), rdmPrice);
         };

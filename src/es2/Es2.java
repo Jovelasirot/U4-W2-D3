@@ -53,12 +53,8 @@ public class Es2 {
 
             int rmdName = rmd.nextInt(0, 5);
 
-            List<String> nameList = new ArrayList<>();
-            nameList.add("Lexi");
-            nameList.add("Anna");
-            nameList.add("William");
-            nameList.add("Joe");
-            nameList.add("Adam");
+            List<String> nameList = List.of("Lexi", "Anna", "William", "Joe", "Adam");
+
 
             return new Customer(rmdId, nameList.get(rmdName), rmdTier);
         };
@@ -73,7 +69,7 @@ public class Es2 {
             int rdmStatus = rdm.nextInt(0, 2);
 
 //            dates
-            LocalDate startRangeDate = LocalDate.parse("2021-02-01");
+            LocalDate startDate = LocalDate.parse("2021-01-01");
 
             int rdmProduct = rdm.nextInt(2, 3);
 //            products
@@ -84,12 +80,10 @@ public class Es2 {
 
             Customer rdmCustomer = getCustomerSupplier().get();
 
-            LocalDate orderDate = startRangeDate.plusDays(rdm.nextInt(1, 200));
+            LocalDate orderDate = startDate.plusDays(rdm.nextInt(1, 500));
             LocalDate deliveryDate = orderDate.plusDays(rdm.nextInt(14));
 
-            List<String> statusList = new ArrayList<>();
-            statusList.add("Shipped");
-            statusList.add("Error");
+            List<String> statusList = List.of("Shipped", "Error");
 
             return new Order(rdmId, statusList.get(rdmStatus), orderDate, deliveryDate, rdmProductList, rdmCustomer);
         };
