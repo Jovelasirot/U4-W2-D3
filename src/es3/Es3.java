@@ -9,26 +9,39 @@ import java.util.function.Supplier;
 
 public class Es3 {
     public static void main(String[] args) {
-        Random rdm = new Random();
 
-        Supplier<Double> rdmPrice = () -> {
-            return rdm.nextDouble(101, 200);
+        Random rmd = new Random();
+
+        Supplier<Product> productSupplier = () -> {
+            long rmdId = rmd.nextLong(10000, 100000);
+
+            double rmdPrice = rmd.nextDouble(10.00, 200.00);
+
+            int rmdName = rmd.nextInt(0, 5);
+
+            int rmdCategory = rmd.nextInt(0, 5);
+
+            List<String> nameList = new ArrayList<>();
+            nameList.add("Product A");
+            nameList.add("Product B");
+            nameList.add("Product C");
+            nameList.add("Product D");
+            nameList.add("Product E");
+
+            List<String> categoryList = new ArrayList<>();
+            categoryList.add("Books");
+            categoryList.add("Boys");
+            categoryList.add("Baby");
+            categoryList.add("Cars");
+            categoryList.add("Guns");
+
+            return new Product(rmdId, nameList.get(rmdName), categoryList.get(rmdCategory), rmdPrice);
         };
-
-        Supplier<Long> rdmId = () -> {
-            return rdm.nextLong(1, 100);
-        };
-
-        Supplier<Product> productSupplier1 = () -> new Product(rdmId.get(), "Random Boys product", "Tea", rdmPrice.get());
-
-        Supplier<Product> productSupplier = () -> new Product(rdmId.get(), "Random Boys product", "Boys", rdmPrice.get());
 
         List<Product> productList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             productList.add(productSupplier.get());
-            productList.add(productSupplier1.get());
         }
-
 
         System.out.println("All products");
         System.out.println(productList);
@@ -41,12 +54,11 @@ public class Es3 {
         System.out.println(boysProducts);
 
         List<Product> discountedBoysProducts = boysProducts.stream().map(product -> {
-            double discountedPrice = product.getPrice() - (product.getPrice() / 10);
-            return new Product(product.getId(), product.getName(), product.getCategory(), discountedPrice);
+            return new Product(product.getId(), product.getName(), product.getCategory(), product.setPrice(product.getPrice() * 0.9));
         }).toList();
 
 
-        System.out.println("Discounted boys products");
+        System.out.println("Discounted boys products" + " (" + discountedBoysProducts.size() + ")");
         System.out.println(discountedBoysProducts);
     }
 }

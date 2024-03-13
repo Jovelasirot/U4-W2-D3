@@ -29,6 +29,10 @@ public class Product {
         return price;
     }
 
+    public double setPrice(Double price) {
+        return this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

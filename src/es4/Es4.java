@@ -61,7 +61,7 @@ public class Es4 {
         Supplier<Order> orderSupplierD = () -> new Order(rdmId.get(), "Shipped", orderDate, deliveryDate, singleProductList, customerD);
 
         List<Order> orderList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 5; i++) {
             orderList.add(orderSupplierA.get());
             orderList.add(orderSupplierB.get());
             orderList.add(orderSupplierC.get());
