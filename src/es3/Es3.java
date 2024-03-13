@@ -10,9 +10,36 @@ import java.util.function.Supplier;
 public class Es3 {
     public static void main(String[] args) {
 
+        Supplier<Product> productSupplier = getProductSupplier();
+
+        List<Product> productList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            productList.add(productSupplier.get());
+        }
+
+        System.out.println("All products");
+        System.out.println(productList);
+
+        System.out.println("-------------------------------");
+
+        List<Product> boysProducts = productList.stream().filter(product -> product.getCategory().equals("Boys")).toList();
+
+        System.out.println("Only boys products");
+        System.out.println(boysProducts);
+
+        List<Product> discountedBoysProducts = boysProducts.stream().map(product -> {
+            return new Product(product.getId(), product.getName(), product.getCategory(), product.setPrice(product.getPrice() * 0.9));
+        }).toList();
+
+
+        System.out.println("Discounted boys products" + " (" + discountedBoysProducts.size() + ")");
+        System.out.println(discountedBoysProducts);
+    }
+
+    private static Supplier<Product> getProductSupplier() {
         Random rmd = new Random();
 
-        Supplier<Product> productSupplier = () -> {
+        return () -> {
             long rmdId = rmd.nextLong(10000, 100000);
 
             double rmdPrice = rmd.nextDouble(10.00, 200.00);
@@ -37,28 +64,5 @@ public class Es3 {
 
             return new Product(rmdId, nameList.get(rmdName), categoryList.get(rmdCategory), rmdPrice);
         };
-
-        List<Product> productList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            productList.add(productSupplier.get());
-        }
-
-        System.out.println("All products");
-        System.out.println(productList);
-
-        System.out.println("-------------------------------");
-
-        List<Product> boysProducts = productList.stream().filter(product -> product.getCategory().equals("Boys")).toList();
-
-        System.out.println("Only boys products");
-        System.out.println(boysProducts);
-
-        List<Product> discountedBoysProducts = boysProducts.stream().map(product -> {
-            return new Product(product.getId(), product.getName(), product.getCategory(), product.setPrice(product.getPrice() * 0.9));
-        }).toList();
-
-
-        System.out.println("Discounted boys products" + " (" + discountedBoysProducts.size() + ")");
-        System.out.println(discountedBoysProducts);
     }
 }

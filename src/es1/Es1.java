@@ -10,9 +10,28 @@ import java.util.function.Supplier;
 public class Es1 {
     public static void main(String[] args) {
 
+        Supplier<Product> productSupplier = getProductSupplier();
+
+        List<Product> productList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            productList.add(productSupplier.get());
+        }
+
+        System.out.println("All products:");
+        System.out.println(productList);
+        System.out.println("----------------------");
+
+        List<Product> filteredProducts = productList.stream().filter(product -> product.getCategory().equals("Books") && product.getPrice() > 100).toList();
+
+        System.out.println("Books with a price of over 100 are: " + filteredProducts.size());
+        filteredProducts.forEach(System.out::println);
+
+    }
+
+    private static Supplier<Product> getProductSupplier() {
         Random rmd = new Random();
 
-        Supplier<Product> productSupplier = () -> {
+        return () -> {
             long rmdId = rmd.nextLong(10000, 100000);
 
             double rmdPrice = rmd.nextDouble(10.00, 200.00);
@@ -37,17 +56,5 @@ public class Es1 {
 
             return new Product(rmdId, nameList.get(rmdName), categoryList.get(rmdCategory), rmdPrice);
         };
-
-
-        List<Product> productList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            productList.add(productSupplier.get());
-        }
-
-        List<Product> filteredProducts = productList.stream().filter(product -> product.getCategory().equals("Books") && product.getPrice() > 100).toList();
-
-        System.out.println("Books with a price of over 100 are: " + filteredProducts.size());
-        filteredProducts.forEach(System.out::println);
-
     }
 }
